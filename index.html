@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacked Bar Chart with Custom Legend</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom styling for the legends */
+        .custom-legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .custom-legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        .custom-legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        .center {
+            max-width: 1100px;
+            padding: 20px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Custom legend for all categories below the chart -->
+    <div class="custom-legend">
+        <div class="custom-legend-item">
+            <div class="custom-legend-color" style="background-color: rgba(144, 238, 144, 0.8);"></div>
+            <span>Employee</span>
+        </div>
+        <div class="custom-legend-item">
+            <div class="custom-legend-color" style="background-color: rgba(72, 209, 204, 0.8);"></div>
+            <span>Engineer</span>
+        </div>
+        <div class="custom-legend-item">
+            <div class="custom-legend-color" style="background-color: rgba(0, 139, 139, 0.8);"></div>
+            <span>Government</span>
+        </div>
+        <div class="custom-legend-item">
+            <div class="custom-legend-color" style="background-color: rgba(25, 25, 112, 0.8);"></div>
+            <span>Political Parties</span>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['< 1', '1 - 2', '3 - 4', '5 - 9', '10 - 14', '15 - 19', '20 - 24', '25 - 29', '> 29'],
+                datasets: [
+                    {
+                        label: 'Employee',
+                        data: [50, 100, 20, 90, 150, 30, 170, 200, 130],
+                        backgroundColor: 'rgba(144, 238, 144, 0.8)', // Light green color for Employee
+                    },
+                    {
+                        label: 'Engineer',
+                        data: [30, 50, 10, 50, 100, 20, 120, 150, 100],
+                        backgroundColor: 'rgba(72, 209, 204, 0.8)', // Medium blue-green color for Engineer
+                    },
+                    {
+                        label: 'Government',
+                        data: [20, 30, 5, 20, 50, 10, 80, 100, 70],
+                        backgroundColor: 'rgba(0, 139, 139, 0.8)', // Dark cyan color for Government
+                    },
+                    {
+                        label: 'Political parties',
+                        data: [10, 20, 3, 10, 30, 5, 40, 50, 40],
+                        backgroundColor: 'rgba(25, 25, 112, 0.8)', // Dark blue color for Political parties
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false // Hide the default legend
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of People'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
